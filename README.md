@@ -11,30 +11,30 @@ Dates are easily formatted for a better localization
 
 Make sure to include jQuery in your page:
 
-	&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js&quot;&gt;&lt;/script&gt;
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 Include **jQuery Twitter:**
 
-	&lt;script src=&quot;js/jquery.twitter.min.js&quot;&gt;&lt;/script&gt;
+	<script src="js/jquery.twitter.min.js"></script>
 
 HTML markup (just an example, do as you want)
 
-&lt;div class=&quot;tweet&quot;&gt;
-	&lt;p&gt;&lt;/p&gt;
-	&lt;p&gt;&lt;/p&gt;
-&lt;/div&gt;
+	<div class="tweet">
+		<p></p>
+		<p></p>
+	</div>
 
 Initialize **jQuery Twitter:**
 
-	&lt;script&gt;
+	<script>
 		$(function(){
 			$.twitter('username', 2, function(data){
 				$('.tweet').find('p').each(function(i){
-					$(this).html(data[i].text).append('&lt;span&gt;' + data[i].time + '&lt;/span&gt;');
+					$(this).html(data[i].text).append('<span>' + data[i].time + '</span>');
 				});
 			});
 		});
-	&lt;/script&gt;
+	</script>
 	
 ##Callback:
 
