@@ -11,19 +11,24 @@ Dates are easily formatted for a better localization
 
 Make sure to include jQuery in your page:
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+```
 
 Include **jQuery Twitter:**
 
-	<script src="js/jquery.twitter.min.js"></script>
+```html
+<script src="js/jquery.twitter.min.js"></script>
+```
 
 HTML markup (just an example, do as you want)
 
-	<div class="tweet">
-		<p></p>
-		<p></p>
-	</div>
-
+```html
+<div class="tweet">
+	<p></p>
+	<p></p>
+</div>
+```
 Initialize **jQuery Twitter:**
 
 ```html
