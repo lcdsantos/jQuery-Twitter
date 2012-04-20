@@ -47,14 +47,16 @@ Initialize **jQuery Twitter:**
 
 Callback function passes a object as first parameter
 
-	function(data){
-		// data[index].text = Tweet
-		// data[index].time = Time of tweet formated
-		// data.length = Number of tweets returned
-		// data.profile.avatar = User avatar
-		// data.profile.followers = User followers count
-		// data.profile.screen_name = User screen name
-	}
+```js
+function(data){
+	// data[index].text = Tweet
+	// data[index].time = Time of tweet formated
+	// data.length = Number of tweets returned
+	// data.profile.avatar = User avatar
+	// data.profile.followers = User followers count
+	// data.profile.screen_name = User screen name
+}
+```
 	
 ##Usage:
 
