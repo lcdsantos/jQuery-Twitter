@@ -26,15 +26,17 @@ HTML markup (just an example, do as you want)
 
 Initialize **jQuery Twitter:**
 
-	<script>
-		$(function(){
-			$.twitter('username', 2, function(data){
-				$('.tweet').find('p').each(function(i){
-					$(this).html(data[i].text).append('<span>' + data[i].time + '</span>');
-				});
+```html
+<script>
+	$(function(){
+		$.twitter('username', 2, function(data){
+			$('.tweet').find('p').each(function(i){
+				$(this).html(data[i].text).append('<span>' + data[i].time + '</span>');
 			});
 		});
-	</script>
+	});
+</script>
+```
 	
 ##Callback:
 
