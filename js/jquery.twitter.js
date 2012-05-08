@@ -1,5 +1,5 @@
 ﻿/*
- * Twitter 1.1
+ * jQuery Twitter 1.1
  *
  * Copyright (c) 2012 Leonardo Santos
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
