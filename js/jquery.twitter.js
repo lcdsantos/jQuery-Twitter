@@ -1,5 +1,5 @@
 ﻿/*
- * jQuery Twitter 1.1
+ * jQuery Twitter 1.2
  *
  * Copyright (c) 2012 Leonardo Santos
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -36,7 +36,7 @@
 		return formatted;
 	};
 	
-	$.twitter = function(usr, numPosts, fn, options) {
+	$.twitter = function(usr, count, fn, options) {
 		var configs = $.extend({
 			timeSpan: true,
 			exclude_replies: true,
@@ -47,19 +47,19 @@
 			i18n_months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 		}, options);
 		
-		if (usr === undefined || numPosts === undefined) {
+		if (usr === undefined || count === undefined) {
 			return;
-		} else if ($.isFunction(numPosts)) {
-			fn = numPosts;
-			numPosts = 1;
+		} else if ($.isFunction(count)) {
+			fn = count;
+			count = 1;
 		}
 		
-		$.getJSON('//api.%01/statuses/user_timeline.json?count=%1&include_entities=1&exclude_replies=%2&screen_name=%3&callback=?'.format(twitterDomain, numPosts, configs.exclude_replies, usr), function(data){
+		$.getJSON('//api.%01/statuses/user_timeline.json?count=%1&include_entities=1&exclude_replies=%2&screen_name=%3&callback=?'.format(twitterDomain, count, configs.exclude_replies, usr), function(data){
 			$.each(data, function(i, tweetData) {
-				var dateTweet = new Date(data[i].created_at.replace(/\+0+/, 'UTC')),
+				var dateTweet = new Date(data[i].created_at.replace(/\+0+/, '')),
 					dateNow = new Date,
 					utc = dateNow.getTimezoneOffset() * (1000*60),
-					dateDiff = (+dateNow) - (+dateTweet),
+					dateDiff = +dateNow - (+dateTweet),
 					m = Math.round( (dateDiff + utc) / (1000*60) ),
 					time,
 					minute = dateTweet.getMinutes();

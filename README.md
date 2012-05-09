@@ -1,4 +1,4 @@
-#jQuery Twitter v1.1
+#jQuery Twitter v1.2
 ====================
 
 jQuery Twitter is a lightweight (2kb minified) and easy to use jQuery plugin that uses Twitter API to pull tweets from a user timeline.
@@ -36,7 +36,7 @@ Initialize **jQuery Twitter:**
 	$(function(){
 		$.twitter('username', 2, function(data){
 			$('.tweet').find('p').each(function(i){
-				$(this).html(data[i].text).append('<span>' + data[i].time + '</span>');
+				data[i] && $(this).html(data[i].text).append('<span>' + data[i].time + '</span>');
 			});
 		});
 	});
