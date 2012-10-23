@@ -1,18 +1,20 @@
-#jQuery Twitter v1.2
+#jQuery Twitter v2
 ====================
 
-jQuery Twitter is a lightweight (2kb minified) and easy to use jQuery plugin that uses Twitter API to pull tweets from a user timeline.
+jQuery Twitter is a lightweight (4KB minified and 1.5KB gzipped) and easy to use jQuery plugin that uses Twitter API to get tweets from a user timeline.
 
-Automatically format links and dates. You can show dates in absolute time (eg.: 04/20/2012 at 10h45) or relative time (eg.: 2 hours ago).
+Automatically format links and dates. You can show dates in absolute time (eg.: 04/20/2012 at 10h45) or relative time (eg.: 2 hours ago), taking care of timezone differences.
 
-Dates are easily formatted for a better localization
+Dates are easily formatted for a better localization.
+
+Also, tweets are cached with localstorage, so twitter won't bother you with too many requests warnings.
 
 ##How to use:
 
 Make sure to include jQuery in your page:
 
 ```html
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 ```
 
 Include **jQuery Twitter:**
@@ -21,10 +23,11 @@ Include **jQuery Twitter:**
 <script src="js/jquery.twitter.min.js"></script>
 ```
 
-HTML markup (just an example, do as you want)
+HTML markup (just an example, do it your way)
 
 ```html
 <div class="tweet">
+	<p></p>
 	<p></p>
 	<p></p>
 </div>
@@ -85,9 +88,12 @@ function(data){
 	</tr>
 	<tr>
 		<td>time_format</td>
-		<td>'%1 %0, %2 at %3'</td>
-		<td>String</td>
-		<td>Date/time format, %0 for day, %1 for month, %2 for year and %3 for hour (timeSpan option muste be <em>false</em>)</td>
+		<td>function(day, month, year, hours, minutes){
+			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).replace(/0(\d\d)|00/, '$1');
+		}</td>
+		<td>Function</td>
+		<td>Date/time format (timeSpan option must be <em>false</em>)</td>
 	</tr>
 	<tr>
 		<td>less_than_a_min</td>
@@ -97,20 +103,42 @@ function(data){
 	</tr>
 	<tr>
 		<td>timespan_format</td>
-		<td>'%0 %1 ago'</td>
-		<td>String</td>
-		<td>Date/time format, %0 for day, %1 for month, %2 for year and %3 for hour (timeSpan option muste be <em>true</em>)</td>
+		<td>function(time, unity){
+			var time_units = ['minute', 'hour', 'day'];
+			return time + ' ' + time_units[unity] + (time > 1 ? 's' : '') + ' ago';
+		}</td>
+		<td>Function</td>
+		<td>Date/time format (timeSpan option must be <em>true</em>)</td>
 	</tr>
 	<tr>
-		<td>i18n_time</td>
-		<td>['minute', 'hour', 'day']</td>
-		<td>Array</td>
-		<td>Time localization</td>
-	</tr>
-	<tr>
-		<td>i18n_months</td>
-		<td>['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']</td>
-		<td>Array</td>
-		<td>Months localization</td>
+		<td>cache_timeout</td>
+		<td>5</td>
+		<td>Integer</td>
+		<td>Time in minutes to keep tweets cached</td>
 	</tr>
 </table>
+
+##Example:
+
+```js
+$(function(){
+	$.twitter('twitterapi', 3, function(data){
+		$('.tweet').find('p').each(function(i){
+			data[i] && $(this).html(data[i].text).prepend('<img src="' + data.profile.avatar + '">').append('<span><a href="' + data[i].link + '" target="_blank">' + data[i].time + '</a></span>');
+		});
+	}, {
+		timeSpan: true,
+		exclude_replies: true,
+		time_format: function(day, month, year, hours, minutes){
+			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).replace(/0(\d\d)|00/, '$1');
+		},
+		timespan_format: function(time, unity){
+			var time_units = ['minute', 'hour', 'day'];
+			return time + ' ' + time_units[unity] + (time > 1 ? 's' : '') + ' ago';
+		},
+		less_than_a_min: 'less than a minute ago',
+		cache_timeout: 5
+	});
+});
+```
