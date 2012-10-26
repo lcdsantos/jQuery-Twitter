@@ -216,7 +216,7 @@ table td { border: 1px solid #DDD; padding: 6px 8px; }
 		exclude_replies: true,
 		time_format: function(day, month, year, hours, minutes){
 			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).replace(/0(\d\d)|00/, '$1');
+			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).slice(-2);
 		},
 		timespan_format: function(time, unity){
 			var time_units = ['minute', 'hour', 'day'];
@@ -249,7 +249,7 @@ $(function(){
 		exclude_replies: true,
 		time_format: function(day, month, year, hours, minutes){
 			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).replace(/0(\d\d)|00/, '$1');
+			return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).slice(-2);
 		},
 		timespan_format: function(time, unity){
 			var time_units = ['minute', 'hour', 'day'];

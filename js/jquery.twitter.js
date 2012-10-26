@@ -1,5 +1,5 @@
 ﻿/*
- * jQuery Twitter 2
+ * jQuery Twitter 2.0.1
  *
  * Copyright (c) 2012 Leonardo Santos
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -24,7 +24,7 @@
 				exclude_replies: true,
 				time_format: function(day, month, year, hours, minutes){
 					var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-					return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).replace(/0(\d\d)|00/, '$1');
+					return months[month] + ' ' + day + ', ' + year + ' at ' + hours + 'h' + ('0' + minutes).slice(-2);
 				},
 				timespan_format: function(time, unity){
 					var time_units = ['minute', 'hour', 'day'];
@@ -81,7 +81,7 @@
 				if (configs.timeSpan) {
 					if (m < 60){
 						// Minutes
-						time = m === 0 ? configs.less_than_a_min : configs.timespan_format(m, 0);
+						time = m == 0 ? configs.less_than_a_min : configs.timespan_format(m, 0);
 					} else if (m < 60*24) {
 						// Hours
 						time = configs.timespan_format(Math.floor(m / 60), 1);		
